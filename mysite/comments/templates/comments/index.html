@@ -1,0 +1,7 @@
+<h1 style="text-align:center">Toxic Comment Detector</h1>
+
+<form style="text-align:center" action="/comments/results/" method="post">
+	{% csrf_token %}
+    Please enter the comment: <input type="text" name="fname"><br>
+	<input label="comment" type="submit" value="see result">
+</form>
