@@ -50,15 +50,15 @@ def getMyModel():
 	X_train = count_vect.transform(data_train)
 	X_test = count_vect.transform(data_test)
 	cls = classify.train_classifier(X_train, y_train)
-	classify.evaluate(X_test, y_test, cls, 'test')
+	#classify.evaluate(X_test, y_test, cls, 'test')
 
-	print("Testing TfidfVectorizer...")
-	tfidf_vect = TfidfVectorizer()
-	tfidf_vect.fit(data)
-	X_train = tfidf_vect.transform(data_train)
-	X_test = tfidf_vect.transform(data_test)
-	cls = classify.train_classifier(X_train, y_train)
-	classify.evaluate(X_test, y_test, cls, 'test')
+	#print("Testing TfidfVectorizer...")
+	#tfidf_vect = TfidfVectorizer()
+	#tfidf_vect.fit(data)
+	#X_train = tfidf_vect.transform(data_train)
+	#X_test = tfidf_vect.transform(data_test)
+	#cls = classify.train_classifier(X_train, y_train)
+	#classify.evaluate(X_test, y_test, cls, 'test')
 
 	#lime
 	"""
@@ -80,7 +80,7 @@ def getMyModel():
 	print("type is:",type(cls))
 	"""
 	from sklearn.pipeline import make_pipeline
-	return make_pipeline(tfidf_vect, cls)
+	return make_pipeline(count_vect, cls)
 
 
 
