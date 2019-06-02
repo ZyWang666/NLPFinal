@@ -1,18 +1,53 @@
+{% load static %}
 
-<h5 style="text-align:center"> Prediction: {{ prediction }}</h5>
-<h5 style="text-align:center"> True Label: {{ label }}</h5>
-<h5 style="text-align:center">{{ features }}</h5>
-<h5 style="text-align:center">{{ s_comment }}</h5>
-<h5 style="text-align:center">{{ words }}</h5>
-<h5 style="text-align:center">{{ pos_pro }}</h5>
-<h5 style="text-align:center">{{ neg_pro }}</h5>
+<link rel="stylesheet" type="text/css" href="{% static 'comments/style.css' %}">
 
+<h1 style="text-align:center"> Model's prediction result: {{ prediction }}</h1>
+<h1 style="text-align:center"> Actual Label: {{ label }}</h1>
 
-<ul>
-    {% for word in s_comment %}
-        {% if word in words %}
-            <li>{{ word }}</li>
-        {% endif %}
-    {% endfor %}
-</ul>
+<h1 style="text-align:center">Probablity Distribution:
+
+	<div class='prob'>
+		<span class='prob-pos' style="display: inline-block; width:{{pos_pro}};"> {{ p}}</span><span class='prob-neg' style="display: inline-block; width:{{neg_pro}};"> {{ n }}</span></h1>
+	</div>
+
+<div style="text-align:  center">
+	<h1 class='feature-part'>
+	Sentence Analysis:
+		<ul style="text-align:center">
+		    {% for word in s_comment %}
+
+		        {% if word in words %}
+		        	{% for pair in features %}
+		        		{%if word == pair.0 %}
+		        			{%if pair.1 < 0%}
+		            			<span class='important-neg'>{{ word }}</span>
+		            		{% else %}
+		            			<span class='important-pos'>{{ word }}</span>
+		            		{% endif %}
+		            	{% endif %}
+		        	{% endfor %}
+		        {% else %}
+		        	<span class='common'>{{ word }}</span>
+				{% endif %}
+
+		    {% endfor %}
+		</ul>
+	</h1>
+</div>
+
+<div style="text-align: center">
+<h1 class='feature-part' >
+	Important features:
+	<ul>
+		{%for pair in features %}
+			{%if pair.1 < 0%}
+				<li class='important-neg'>{{pair}}</li>
+			{%else%}
+				<li class='important-pos'>{{pair}}</li>
+			{%endif%}
+		{% endfor %}
+	</ul>
+</h1>
+</div>
 

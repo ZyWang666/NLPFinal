@@ -1,0 +1,18 @@
+
+<h5 style="text-align:center"> Prediction: {{ prediction }}</h5>
+<h5 style="text-align:center"> True Label: {{ label }}</h5>
+<h5 style="text-align:center">{{ features }}</h5>
+<h5 style="text-align:center">{{ s_comment }}</h5>
+<h5 style="text-align:center">{{ words }}</h5>
+<h5 style="text-align:center">{{ pos_pro }}</h5>
+<h5 style="text-align:center">{{ neg_pro }}</h5>
+
+
+<ul>
+    {% for word in s_comment %}
+        {% if word in words %}
+            <li>{{ word }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
