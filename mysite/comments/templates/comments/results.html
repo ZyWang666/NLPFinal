@@ -15,32 +15,34 @@
 	Probability Distribution:
 	<div class='prob'>
 		{{neg_pre}}
-		<span class='prob-neg' style="display: inline-block; width:{{ neg_pro }}; margin: 20px"> {{ n }} </span>
-		<span class='prob-pos' style="display: inline-block; width:{{ pos_pro }}; margin: 20px"> {{ p }} </span>
+		<span class='prob-neg' style="display: inline-block; width:{{ neg_pro }}; margin-left: 20px"> {{ n }} </span>
+		<span class='prob-pos' style="display: inline-block; width:{{ pos_pro }}; margin-right: 20px"> {{ p }} </span>
 		{{pos_pre}}
 	</div>
 </h1>
 
-<div style="text-align:  center">
+<div style="text-align: center">
 	<h1 class='feature-part'>
 	Sentence Analysis:
-		<ul style="text-align:center">
-		    {% for word in s_comment %}
-		        {% if word in words %}
-		        	{% for pair in features %}
-		        		{%if word == pair.0 %}
-		        			{%if pair.1 < 0%}
-		            			<span class='important-neg'>{{ word }}</span>
-		            		{% else %}
-		            			<span class='important-pos'>{{ word }} </span>
-		            		{% endif %}
+	</h1>
+	<h1 style="text-align: justify; margin-left: 30px; margin-right: 30px">
+	<ul>
+		{% for word in s_comment %}
+		    {% if word in words %}
+		        {% for pair in features %}
+		        	{%if word == pair.0 %}
+		        		{%if pair.1 < 0%}
+		            		<span class='important-neg'>{{ word }}</span>
+		            	{% else %}
+		            		<span class='important-pos'>{{ word }} </span>
 		            	{% endif %}
-		        	{% endfor %}
-		        {% else %}
-		        	<span class='common'>{{ word }}</span>
-				{% endif %}
-		    {% endfor %}
-		</ul>
+		            {% endif %}
+		        {% endfor %}
+		    {% else %}
+		        <span class='common'>{{ word }}</span>
+			{% endif %}
+		{% endfor %}
+	</ul>
 	</h1>
 </div>
 <div style="text-align: center">
@@ -50,10 +52,10 @@
 	<ul>
 		{%for pair in features %}
 			{%if pair.1 < 0%}
-				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}">{{pair.0}}</li>
+				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}; margin-bottom: 10px">{{pair.0}}</li>
 			{%else%}
 				{%widthratio pair.1 highest_value 1 as cur_pos%}
-				<li class='important-pos' style="width: {{ pair.1 }}">{{pair.0}}</li>
+				<li class='important-pos' style="width: {{ pair.1 }}; margin-bottom: 10px">{{pair.0}}</li>
 			{%endif%}
 		{% endfor %}
 	</ul>
@@ -67,10 +69,10 @@
 		{%for pair in t_features %}
 			{%if pair.1 < 0%}
 				{%widthratio pair.1 model_highest_value 1 as cur_neg%}
-				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}">{{pair.0}}</li>
+				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}; margin-bottom: 10px">{{pair.0}}</li>
 			{%else%}
 				{%widthratio pair.1 highest_value 1 as cur_pos%}
-				<li class='important-pos' style="width: {{ pair.1 }}">{{pair.0}}</li>
+				<li class='important-pos' style="width: {{ pair.1 }}; margin-bottom: 10px">{{pair.0}}</li>
 			{%endif%}
 		{% endfor %}
 	</ul>
