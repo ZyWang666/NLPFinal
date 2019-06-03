@@ -1,32 +1,55 @@
-<h1 style="text-align:center">Comment Detector</h1>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'comments/indexStyle.css' %}">
+
+<body bgcolor="#33DDFF">
+
+<h1  class="d" style="text-align:center; font-size: 35; font-style: italic;">Comment Predictor</h1>
 
 <form style="text-align:center" action="/results/" method="post">
 	{% csrf_token %}
-    Please enter the comment: <input type="text" name="fname"><br>
-	<div>
-	Please enter the true label: 
-		<select name="flabel">
+
+	<div class="d">
+    <span class="instruction">Please enter the comment:</span> <input type="text" name="fname" class="choice" style="width:400px"><br>
+	</div>
+
+	<div class="d">
+	<span class="instruction">Please enter the true label: </span>
+		<select name="flabel"  class="choice">
 			<option value="positive">positive</option>
 			<option value="negative">negative</option>
 		</select>
 	</div>
-	<div>
-	Please choose the number of important features:
-		<select name="ffeatures">
+
+	<div  class="d">
+	<span class="instruction">Please choose the number of important features:</span>
+		<select name="ffeatures" class="choice">
 			<option value="1">1</option>
 			<option value="2">2</option>
 	  		<option value="3">3</option>
 	  		<option value="4">4</option>
 	  		<option value="5">5</option>
 	  		<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+	  		<option value="9">9</option>
+	  		<option value="10">10</option>
+	  		<option value="11">11</option>
+	  		<option value="12">12</option>
 		</select>
 	</div>
-	<div>
-		Please select the model:
-		<select name="fmodel">
+
+	<div  class="d">
+		<span class="instruction">Please select the model:</span>
+		<select name="fmodel" class="choice">
 			<option value="Sentiment">Sentiment prediction</option>
 			<option value="Toxic">Toxic prediction</option>
 		</select>
 	</div>
-	<input label="comment" type="submit" value="see result">
+
+	<div class="d">
+	<input class="choice2" label="comment" type="submit" value="see result">
+	</div>
 </form>
+
+</body>

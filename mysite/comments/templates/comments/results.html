@@ -2,13 +2,18 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'comments/style.css' %}">
 
-<h1 style="text-align:center"> Model's prediction result: {{ prediction }}</h1>
-<h1 style="text-align:center"> Actual Label: {{ label }}</h1>
+<h1 style="text-align:center"> Model's prediction result:
+	<span>{{ prediction }}</span>
+</h1>
+<h1 style="text-align:center"> Actual Label: 
+	<span>{{ label }}</span>
+</h1>
+
 
 <h1 style="text-align:center">Probablity Distribution:
 
 	<div class='prob'>
-		<span class='prob-pos' style="display: inline-block; width:{{pos_pro}};"> {{ p}}</span><span class='prob-neg' style="display: inline-block; width:{{neg_pro}};"> {{ n }}</span></h1>
+		{{neg_pre}}<span class='prob-pos' style="display: inline-block; width:{{pos_pro}};"> {{ p}}</span><span class='prob-neg' style="display: inline-block; width:{{neg_pro}};"> {{ n }}</span>{{pos_pre}}</h1>
 	</div>
 
 <div style="text-align:  center">
@@ -21,9 +26,12 @@
 		        	{% for pair in features %}
 		        		{%if word == pair.0 %}
 		        			{%if pair.1 < 0%}
+		        			
 		            			<span class='important-neg'>{{ word }}</span>
+		        			
 		            		{% else %}
-		            			<span class='important-pos'>{{ word }}</span>
+		            	
+		            			<span class='important-pos'>{{ word }} </span>
 		            		{% endif %}
 		            	{% endif %}
 		        	{% endfor %}
@@ -35,19 +43,38 @@
 		</ul>
 	</h1>
 </div>
-
 <div style="text-align: center">
+<div style="text-align: center; display: inline">
 <h1 class='feature-part' >
-	Important features:
+	Important features for Lime:
 	<ul>
 		{%for pair in features %}
 			{%if pair.1 < 0%}
-				<li class='important-neg'>{{pair}}</li>
+				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}">{{pair.0}}</li>
 			{%else%}
-				<li class='important-pos'>{{pair}}</li>
+				{%widthratio pair.1 highest_value 1 as cur_pos%}
+				<li class='important-pos' style="width: {{ pair.1 }}">{{pair.0}}</li>
 			{%endif%}
 		{% endfor %}
 	</ul>
 </h1>
+</div>
+
+<div style="text-align: center; display: inline">
+<h1 class='feature-part' >
+	Important features for Model:
+	<ul>
+		{%for pair in t_features %}
+			{%if pair.1 < 0%}
+				{%widthratio pair.1 model_highest_value 1 as cur_neg%}
+				<li class='important-neg' style="width: {% widthratio pair.1 1 -1 %}">{{pair.0}}</li>
+			{%else%}
+				{%widthratio pair.1 highest_value 1 as cur_pos%}
+				<li class='important-pos' style="width: {{ pair.1 }}">{{pair.0}}</li>
+			{%endif%}
+		{% endfor %}
+	</ul>
+</h1>
+</div>
 </div>
 
