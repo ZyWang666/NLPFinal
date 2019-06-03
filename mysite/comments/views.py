@@ -59,7 +59,7 @@ def results(request):
 	features = exp.as_list()
 	features = [(p[0],round(p[1],2)) for p in features]
 	# positive probability and negative probability of model	
-	pos_pro, neg_pro = exp.predict_proba
+	neg_pro, pos_pro = exp.predict_proba
 	# striped and splited text
 	s_comment = comment.translate(str.maketrans('', '', string.punctuation)).split(' ')
 	t_features = top_features(s_comment, fns, cls, int(n_features))

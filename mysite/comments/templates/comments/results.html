@@ -2,35 +2,36 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'comments/style.css' %}">
 
-<h1 style="text-align:center"> Model's prediction result:
+<h1 style="text-align:center">
+	Model's prediction result:
 	<span>{{ prediction }}</span>
 </h1>
-<h1 style="text-align:center"> Actual Label: 
+<h1 style="text-align:center">
+	Actual Label:
 	<span>{{ label }}</span>
 </h1>
 
-
-<h1 style="text-align:center">Probablity Distribution:
-
+<h1 style="text-align:center">
+	Probability Distribution:
 	<div class='prob'>
-		{{neg_pre}}<span class='prob-pos' style="display: inline-block; width:{{pos_pro}};"> {{ p}}</span><span class='prob-neg' style="display: inline-block; width:{{neg_pro}};"> {{ n }}</span>{{pos_pre}}</h1>
+		{{neg_pre}}
+		<span class='prob-neg' style="display: inline-block; width:{{ neg_pro }}; margin: 20px"> {{ n }} </span>
+		<span class='prob-pos' style="display: inline-block; width:{{ pos_pro }}; margin: 20px"> {{ p }} </span>
+		{{pos_pre}}
 	</div>
+</h1>
 
 <div style="text-align:  center">
 	<h1 class='feature-part'>
 	Sentence Analysis:
 		<ul style="text-align:center">
 		    {% for word in s_comment %}
-
 		        {% if word in words %}
 		        	{% for pair in features %}
 		        		{%if word == pair.0 %}
 		        			{%if pair.1 < 0%}
-		        			
 		            			<span class='important-neg'>{{ word }}</span>
-		        			
 		            		{% else %}
-		            	
 		            			<span class='important-pos'>{{ word }} </span>
 		            		{% endif %}
 		            	{% endif %}
@@ -38,7 +39,6 @@
 		        {% else %}
 		        	<span class='common'>{{ word }}</span>
 				{% endif %}
-
 		    {% endfor %}
 		</ul>
 	</h1>
@@ -77,4 +77,3 @@
 </h1>
 </div>
 </div>
-
